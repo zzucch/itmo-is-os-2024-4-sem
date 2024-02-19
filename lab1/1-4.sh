@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-if [[ $PWD == "$HOME" ]] ; then
-  echo "$HOME"
-  exit 0
+if [[ $PWD == "$HOME" ]]; then
+	echo "$HOME"
+	exit 0
 fi
 
 echo "error"
