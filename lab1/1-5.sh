@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+rm -f info.log
 touch info.log
 
 awk '{
