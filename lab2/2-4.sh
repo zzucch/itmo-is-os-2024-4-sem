@@ -22,5 +22,5 @@ for pid in $(ls /proc | grep -E '^[0-9]+$'); do
 done \
 	| sort -t ':' -k2n \
 	| awk -F ':' '{
-    print "ProcessID="$1" : Parent_ProcessID="$2" : Average_Running_Time="$3
-  }' >2-4-output.txt
+      print "ProcessID="$1" : Parent_ProcessID="$2" : Average_Running_Time="$3
+    }' >2-4-output.txt
