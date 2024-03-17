@@ -33,7 +33,7 @@ while IFS= read -r line; do
 
 	count=$((count + 1))
 	ppid_runtimes_sum=$(
-		awk "BEGIN {
+    awk "BEGIN {
       printf \"%.3f\", $ppid_runtimes_sum + $current_avg_runtime
     }"
 	)
