@@ -15,7 +15,7 @@ for pid in $(ls /proc | grep -E '^[0-9]+$'); do
 
   average_runtime=$(
     awk "BEGIN {
-      printf \"%.2f\", $sum_exec_runtime / $nr_switches
+      printf \"%.3f\", $sum_exec_runtime / $nr_switches
     }"
   )
 
