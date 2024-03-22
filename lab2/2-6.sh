@@ -3,7 +3,7 @@
 max_mem_kb=0
 max_pid=0
 
-for pid in $(ls /proc | grep -E '^[0-9]+$'); do
+for pid in "$(ls /proc | grep -E '^[0-9]+$')"; do
 	if [[ ! -d "/proc/$pid" ]]; then
 		continue
 	fi
@@ -15,7 +15,7 @@ for pid in $(ls /proc | grep -E '^[0-9]+$'); do
 	fi
 
 	mem_kb=${mem_kb% *}
-	mem_kb=$(echo $mem_kb | tr -d '\t')
+	mem_kb=$(echo "$mem_kb" | tr -d '\t')
 
 	if [[ $mem_kb -gt $max_mem_kb ]]; then
 		max_mem_kb=$mem_kb
@@ -24,5 +24,5 @@ for pid in $(ls /proc | grep -E '^[0-9]+$'); do
 done
 
 echo "Process with max memory usage:" \
-	"$(ps -p $max_pid -o comm=) ($max_pid)," \
+	"$(ps -p "$max_pid" -o comm=) ($max_pid)," \
 	"memory usage: $max_mem_kb kB"

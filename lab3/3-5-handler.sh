@@ -4,8 +4,9 @@ mode="addition"
 current_value=1
 
 script_dir="$(dirname "$0")"
+pipe_name="$script_dir"/3-5-pipe
 
-(tail -F "$script_dir"/pipe) |
+(tail -F "$pipe_name") |
 	while read -r line; do
 		if [[ $line == "+" ]]; then
 			echo "in addition mode"
