@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 script_dir="$(dirname "$0")"
-pipe_name="$script_dir"/3-6-pid-pipe
+pid_filename="$script_dir"/3-6-pid
 
-echo $$ >"$pipe_name"
+echo $$ >"$pid_filename"
 
 current_value=1
 
