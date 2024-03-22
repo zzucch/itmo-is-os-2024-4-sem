@@ -5,7 +5,4 @@
 
 report_filename="report"
 
-(tail -F -n0 "$HOME/$report_filename") |
-	while read -r line; do
-		echo "$line"
-	done
+tail -F -n0 "$HOME/$report_filename"
