@@ -9,7 +9,7 @@ fi
 trash_dir=~/.trash
 trash_log=~/.trash.log
 
-if [[ ! -d trash_dir ]]; then
+if [[ ! -d $trash_dir ]]; then
 	mkdir "$trash_dir"
 fi
 
