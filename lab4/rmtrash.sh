@@ -24,9 +24,9 @@ link_name=$(
 		awk '{print $1+1}'
 )
 
-if [[ -f $trash_dir/$link_name  ]]; then
-  echo "failed to create link file: file already exists"
-  exit 1
+if [[ -f $trash_dir/$link_name ]]; then
+	echo "failed to create link file: file already exists"
+	exit 1
 fi
 
 ln "$1" "$trash_dir/$link_name" && rm "$1"

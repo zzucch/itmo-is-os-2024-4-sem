@@ -24,20 +24,20 @@ else
 	echo "using backup directory $existing_backup_dir" >>"$backup_report"
 
 	for file in "$source_dir"/*; do
-		filename=$(basename "$file")
-		backup_file="$backup_dir/$filename"
+		file_name=$(basename "$file")
+		backup_file="$backup_dir/$file_name"
 
 		if [ ! -f "$backup_file" ]; then
 			cp -R "$file" "$backup_dir/"
-			echo "copied $filename" >>"$backup_report"
+			echo "copied $file_name" >>"$backup_report"
 
 			continue
 		fi
 
 		if [[ $(stat -c%s "$file") -ne $(stat -c%s "$backup_file") ]]; then
-			name_part="${filename%.*}"
+			name_part="${file_name%.*}"
 
-			extension_part="${filename##*.}"
+			extension_part="${file_name##*.}"
 			if [[ -z $extension_part ]]; then
 				extension_part=""
 			fi
@@ -47,8 +47,8 @@ else
 			mv "$backup_file" "$prev_backup_filename"
 			cp -R "$file" "$backup_dir/"
 
-			echo "renamed $filename to $prev_backup_filename" \
-				"and copied $filename" >>"$backup_report"
+			echo "renamed $file_name to $prev_backup_filename" \
+				"and copied $file_name" >>"$backup_report"
 		fi
 	done
 fi
