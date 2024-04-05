@@ -3,6 +3,7 @@
 if [[ $# -ne 1 ]]; then
 	echo "invalid arguments amount"
 	echo "usage: $(basename "$0") filename"
+
 	exit 1
 fi
 
@@ -26,8 +27,29 @@ for line in "${files[@]}"; do
 		continue
 		;;
 	*)
-		ln "$trash_dir/$link_name" "$untrash_path"
-		rm "$trash_dir/$link_name"
+		if [[ ! -d $(dirname "$untrash_path") ]]; then
+			echo "the original directory no longer exists, untrashing to the" \
+				"user home directory"
+
+			ln "$trash_dir/$link_name" "$HOME/$(basename "$untrash_path")"
+			rm "$trash_dir/$link_name"
+
+			exit 0
+		fi
+
+		if ln "$trash_dir/$link_name" "$untrash_path" 2>/dev/null; then
+			rm "$trash_dir/$link_name"
+		else
+			echo "failed to make a link, provide new path: "
+			read -r new_path
+
+			if ln "$trash_dir/$link_name" "$new_path" 2>/dev/null; then
+				echo "invalid path"
+				exit 1
+			fi
+
+			rm "$trash_dir/$link_name"
+		fi
 		;;
 	esac
 done
