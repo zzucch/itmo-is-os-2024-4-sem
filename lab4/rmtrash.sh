@@ -3,6 +3,7 @@
 if [[ $# -ne 1 ]]; then
 	echo "invalid arguments amount"
 	echo "usage: $(basename "$0") filename"
+
 	exit 1
 fi
 

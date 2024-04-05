@@ -45,6 +45,7 @@ for line in "${files[@]}"; do
 
 			if ln "$trash_dir/$link_name" "$new_path" 2>/dev/null; then
 				echo "invalid path"
+
 				exit 1
 			fi
 
