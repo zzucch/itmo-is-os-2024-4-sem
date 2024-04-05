@@ -27,7 +27,7 @@ else
 		file_name=$(basename "$file")
 		backup_file="$backup_dir/$file_name"
 
-		if [ ! -f "$backup_file" ]; then
+		if [[ ! -f $backup_file ]]; then
 			cp -R "$file" "$backup_dir/"
 			echo "copied $file_name" >>"$backup_report"
 
