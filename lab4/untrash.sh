@@ -19,7 +19,7 @@ IFS=$'\n' read -r -d '' -a files <<<"$result"
 
 for line in "${files[@]}"; do
 	IFS=: read -r untrash_path link_name <<<"$line"
-	echo "untrash $untrash_path? (y/N): "
+	echo "untrash $untrash_path? (Y/n): "
 	read -r response
 
 	case "$response" in
