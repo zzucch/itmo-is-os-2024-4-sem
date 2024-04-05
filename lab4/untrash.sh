@@ -34,7 +34,7 @@ for line in "${files[@]}"; do
 			ln "$trash_dir/$link_name" "$HOME/$(basename "$untrash_path")"
 			rm "$trash_dir/$link_name"
 
-			exit 0
+			continue
 		fi
 
 		if ln "$trash_dir/$link_name" "$untrash_path" 2>/dev/null; then
