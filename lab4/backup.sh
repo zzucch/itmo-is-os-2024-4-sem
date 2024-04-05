@@ -11,7 +11,7 @@ existing_backup_dir=$(
 
 source_dir="$HOME/source"
 
-if [ "$existing_backup_dir" = "" ]; then
+if [[ -z $existing_backup_dir ]]; then
 	mkdir -p "$backup_dir"
 	echo "created backup directory $backup_dir" >>"$backup_report"
 
