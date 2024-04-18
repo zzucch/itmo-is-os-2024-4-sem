@@ -12,7 +12,7 @@ filename=$1
 trash_dir=~/.trash
 trash_log=~/.trash.log
 
-result=$(grep "^$filename:" "$trash_log" | cut -d ':' -f 2,3)
+result=$(grep -F "$filename:" "$trash_log" | cut -d ':' -f 2,3)
 echo "result: $result"
 
 IFS=$'\n' read -r -d '' -a files <<<"$result"
@@ -31,25 +31,25 @@ for line in "${files[@]}"; do
 			echo "the original directory no longer exists, untrashing to the" \
 				"user home directory"
 
-			ln "$trash_dir/$link_name" "$HOME/$(basename "$untrash_path")"
-			rm "$trash_dir/$link_name"
+			ln -- "$trash_dir/$link_name" "$HOME/$(basename "$untrash_path")"
+			rm -I -- "$trash_dir/$link_name"
 
 			continue
 		fi
 
-		if ln "$trash_dir/$link_name" "$untrash_path" 2>/dev/null; then
-			rm "$trash_dir/$link_name"
+		if ln -- "$trash_dir/$link_name" "$untrash_path" 2>/dev/null; then
+			rm -I -- "$trash_dir/$link_name"
 		else
 			echo "failed to make a link, provide new path: "
 			read -r new_path
 
-			if ln "$trash_dir/$link_name" "$new_path" 2>/dev/null; then
+			if ln -- "$trash_dir/$link_name" "$new_path" 2>/dev/null; then
 				echo "invalid path"
 
 				exit 1
 			fi
 
-			rm "$trash_dir/$link_name"
+			rm -I -- "$trash_dir/$link_name"
 		fi
 		;;
 	esac

@@ -30,7 +30,7 @@ if [[ -f $trash_dir/$link_name ]]; then
 	exit 1
 fi
 
-ln "$1" "$trash_dir/$link_name" && rm "$1"
+ln "$1" "$trash_dir/$link_name" && rm -i -- "$1"
 
 echo "created hard link $trash_dir/$link_name" \
 	"and removed $(realpath "$1")" >>"$trash_log"
