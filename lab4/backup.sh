@@ -11,6 +11,11 @@ existing_backup_dir=$(
 
 source_dir="$HOME/source"
 
+if [[ ! -d $source_dir ]]; then
+  echo "error: source directory $source_dir does not exist"
+  exit 1
+fi
+
 if [[ -z $existing_backup_dir ]]; then
 	mkdir -p "$backup_dir"
 	echo "created backup directory $backup_dir" >>"$backup_report"
