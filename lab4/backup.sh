@@ -40,14 +40,7 @@ else
 		fi
 
 		if [[ $(stat -c%s "$file") -ne $(stat -c%s "$backup_file") ]]; then
-			name_part="${file_name%.*}"
-
-			extension_part="${file_name##*.}"
-			if [[ -z $extension_part ]]; then
-				extension_part=""
-			fi
-
-			prev_backup_filename="${name_part}.$current_date.$extension_part"
+			prev_backup_filename="$backup_file.$current_date"
 
 			mv "$backup_file" "$prev_backup_filename"
 			cp -R "$file" "$backup_dir/"
