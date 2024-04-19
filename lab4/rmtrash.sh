@@ -32,5 +32,6 @@ fi
 
 ln "$1" "$trash_dir/$link_name" && rm -i -- "$1"
 
-echo "created hard link $trash_dir/$link_name" \
-	"and removed $(realpath "$1")" >>"$trash_log"
+echo "created hard link and removed:" >>"$trash_log"
+
+echo "$link_name:$trash_dir/$link_name:$(realpath "$1")" >>$trash_log
