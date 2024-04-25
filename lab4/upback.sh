@@ -11,7 +11,7 @@ if [[ ! -d $destination_dir ]]; then
 	mkdir "$destination_dir"
 fi
 
-regex=".*[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}.*"
+regex="^.*[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}$"
 
-find "$HOME/$backup_dir" -type f -regextype posix-extended ! -regex "$regex" \
+find "$HOME/$backup_dir" -type f -regextype posix-extended ! -regex $regex \
 	-exec cp {} "$destination_dir" \;
