@@ -8,7 +8,7 @@ if [ "$1" = "" ]; then
 	exit 1
 fi
 
-N=$1
+max_array_size=$1
 
 script_dir=$(dirname "$0")
 report_log_filename=$script_dir/report.log
@@ -25,8 +25,8 @@ while true; do
 
 		((step++))
 
-		if [[ ${#array[@]} -gt $N ]]; then
-			echo "array size is more than $N, exiting.."
+		if [[ ${#array[@]} -gt $max_array_size ]]; then
+			echo "array size is more than $max_array_size, exiting.."
 
 			exit 0
 		fi
