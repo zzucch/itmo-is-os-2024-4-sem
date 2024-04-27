@@ -12,11 +12,11 @@ step=0
 while true; do
 	for i in {1..10}; do
 		array+=("$i")
-
-		((step++))
-
-		if ((step % offset == 0)); then
-			echo ${#array[@]} >>"$report_log_filename"
-		fi
 	done
+
+	((step++))
+
+	if ((step % offset == 0)); then
+		echo ${#array[@]} >>"$report_log_filename"
+	fi
 done

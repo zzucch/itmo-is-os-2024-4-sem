@@ -18,17 +18,17 @@ step=0
 while true; do
 	for i in {1..10}; do
 		array+=("$i")
-
-		((step++))
-
-		if [[ ${#array[@]} -gt $max_array_size ]]; then
-			echo "array size is more than $max_array_size, exiting.."
-
-			exit 0
-		fi
-
-		if ((step % offset == 0)); then
-			echo ${#array[@]}
-		fi
 	done
+
+	((step++))
+
+	if [[ ${#array[@]} -gt $max_array_size ]]; then
+		echo "array size is more than $max_array_size, exiting.."
+
+		exit 0
+	fi
+
+	if ((step % offset == 0)); then
+		echo ${#array[@]}
+	fi
 done
