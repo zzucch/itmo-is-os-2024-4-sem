@@ -10,11 +10,7 @@ fi
 
 max_array_size=$1
 
-script_dir=$(dirname "$0")
-report_log_filename=$script_dir/report.log
 offset=100000
-
-true >"$report_log_filename"
 
 array=()
 step=0
@@ -32,7 +28,7 @@ while true; do
 		fi
 
 		if ((step % offset == 0)); then
-			echo ${#array[@]} >>"$report_log_filename"
+			echo ${#array[@]}
 		fi
 	done
 done
