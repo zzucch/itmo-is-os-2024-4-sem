@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 
@@ -23,10 +24,12 @@ func main() {
 	var data []parse.MemData
 	var currentTime string
 
+	weekdayRegex := regexp.MustCompile(`(Mon|Tue|Wed|Thu|Fri|Sat|Sun) `)
+
 	for scanner.Scan() {
 		line := scanner.Text()
 
-		if strings.HasPrefix(line, "Thu") {
+		if weekdayRegex.MatchString(line) {
 			currentTime = line
 		} else if strings.HasPrefix(line, "MiB Mem") {
 			mem := parse.ParseMemLine(line)
