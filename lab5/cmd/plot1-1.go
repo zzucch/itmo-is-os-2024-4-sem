@@ -2,11 +2,11 @@ package main
 
 import (
 	"bufio"
-	"log"
 	"os"
 	"strings"
 	"time"
 
+	"github.com/charmbracelet/log"
 	"github.com/zzucch/itmo-is-os-2024-4-sem/internal/parse"
 	"github.com/zzucch/itmo-is-os-2024-4-sem/internal/plot"
 )
@@ -14,11 +14,12 @@ import (
 func main() {
 	file, err := os.Open("monitor1-1.log")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to open file", "err", err)
 	}
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
+
 	var data []parse.MemData
 	var currentTime string
 
@@ -38,8 +39,8 @@ func main() {
 	}
 
 	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to scan", "err", err)
 	}
 
-	plot.PlotMemData(data)
+	plot.PlotMemData(data, "plot1-1")
 }

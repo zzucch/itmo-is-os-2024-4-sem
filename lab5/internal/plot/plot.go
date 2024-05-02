@@ -2,71 +2,74 @@ package plot
 
 import (
 	"image/color"
-	"log"
 
+	"github.com/charmbracelet/log"
 	"github.com/zzucch/itmo-is-os-2024-4-sem/internal/parse"
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/vg"
 )
 
-func PlotMemData(data []parse.MemData) {
-	p := plot.New()
+func PlotMemData(data []parse.MemData, filename string) {
+	plot := plot.New()
 
-	p.Title.Text = "MiB Mem Over Time"
-	p.X.Label.Text = "Time (seconds)"
-	p.Y.Label.Text = "MiB"
+	plot.Title.Text = "MiB Mem Over Time"
+	plot.X.Label.Text = "Time (seconds)"
+	plot.Y.Label.Text = "MiB"
 
 	ptsTotal := make(plotter.XYs, len(data))
 	ptsFree := make(plotter.XYs, len(data))
 	ptsUsed := make(plotter.XYs, len(data))
 
-	refTime := float64(data[0].Time)
+	startTime := float64(data[0].Time)
 
 	for i, d := range data {
-		ptsTotal[i].X = float64(d.Time) - refTime
+		ptsTotal[i].X = float64(d.Time) - startTime
 		ptsTotal[i].Y = d.Total
 
-		ptsFree[i].X = float64(d.Time) - refTime
+		ptsFree[i].X = float64(d.Time) - startTime
 		ptsFree[i].Y = d.Free
 
-		ptsUsed[i].X = float64(d.Time) - refTime
+		ptsUsed[i].X = float64(d.Time) - startTime
 		ptsUsed[i].Y = d.Used
 	}
 
-	w := vg.Points(1)
+	width := vg.Points(1)
 	totalLine, err := plotter.NewLine(ptsTotal)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to get total line", "err", err)
 	}
-	totalLine.Width = w
+	totalLine.Width = width
 	totalLine.Color = color.RGBA{B: 255, A: 255}
 
 	freeLine, err := plotter.NewLine(ptsFree)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to get free line", "err", err)
 	}
-	freeLine.Width = w
+	freeLine.Width = width
 	freeLine.Color = color.RGBA{G: 255, A: 255}
 
 	usedLine, err := plotter.NewLine(ptsUsed)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to get used line", "err", err)
 	}
-	usedLine.Width = w
+	usedLine.Width = width
 	usedLine.Color = color.RGBA{R: 255, A: 255}
 
-	p.Add(totalLine, freeLine, usedLine)
-	p.Legend.Add("Total", totalLine)
-	p.Legend.Add("Free", freeLine)
-	p.Legend.Add("Used", usedLine)
+	plot.Add(totalLine, freeLine, usedLine)
 
-	p.X.Min = 0
-	p.X.Max = float64(data[len(data)-1].Time) - refTime
-	p.Y.Min = 0
-	p.Y.Max = 16000
+	plot.Legend.Add("Total", totalLine)
+	plot.Legend.Add("Free", freeLine)
+	plot.Legend.Add("Used", usedLine)
 
-	if err := p.Save(5*vg.Inch, 3*vg.Inch, "plot1-1.png"); err != nil {
-		log.Fatal(err)
+	plot.X.Min = 0
+	plot.X.Max = float64(data[len(data)-1].Time) - startTime
+	plot.Y.Min = 0
+	plot.Y.Max = 16000
+
+	filename = filename + ".png"
+
+	if err := plot.Save(5*vg.Inch, 3*vg.Inch, filename); err != nil {
+		log.Fatal("failed to save plot", "err", err)
 	}
 }
