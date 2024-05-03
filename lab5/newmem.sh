@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ "$1" = "" ]; then
+if [[ -z $1 ]]; then
 	echo "invalid arguments amount"
 	echo "usage: $(basename "$0") N"
 	echo "N - max array size"
