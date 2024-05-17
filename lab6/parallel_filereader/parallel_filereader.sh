@@ -16,6 +16,6 @@ function filereader() {
 	done <"$filename"
 }
 
-export -f fileworker
+export -f filereader
 
 seq "$1" | parallel -j0 filereader
