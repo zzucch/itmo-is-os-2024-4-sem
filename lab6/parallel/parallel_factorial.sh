@@ -18,6 +18,6 @@ factorial() {
 	done
 }
 
-for ((i = 1; i <= n; i++)); do
-	factorial "$i"
-done
+export -f factorial
+
+seq "$n" | parallel -j0 factorial
