@@ -2,11 +2,18 @@
 
 script_dir=$(dirname "$0")
 script_path=$script_dir/factorial.sh
-results_path=$script_dir/results/factorial_1.txt
+results_dir=$script_dir/results
+results_path=$results_dir/factorial_1.txt
+
+if [[ ! -d $results_dir ]]; then
+	mkdir -p "$results_dir"
+fi
 
 for ((i = 1; i <= 20; i++)); do
 	for ((j = 1; j <= 10; j++)); do
-		time_result=$(time bash "$script_path" "$i")
-		echo "time result $time_result"
+		/usr/bin/time -o tmp.txt -f "%e" bash "$script_path" "$i"
+		tail -n 1 tmp.txt >>"$results_path"
 	done
 done
+
+rm tmp.txt

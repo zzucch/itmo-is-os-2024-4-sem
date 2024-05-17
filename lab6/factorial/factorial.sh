@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ $# -ne 1 ]]; then
+if [[ $# -lt 1 ]]; then
 	echo "invalid arguments amount"
 	echo "usage: $(basename "$0") N"
 
@@ -16,10 +16,8 @@ factorial() {
 	for ((i = 1; i <= n; i++)); do
 		result=$((result * i))
 	done
-
-	echo "$result"
 }
 
 for ((i = 1; i <= n; i++)); do
-	echo "factorial of $i is $(factorial "$i")"
+	factorial "$i"
 done
