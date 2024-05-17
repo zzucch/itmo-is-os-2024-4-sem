@@ -3,7 +3,7 @@
 script_dir=$(dirname "$0")
 script_path=$script_dir/filereader.sh
 results_dir=$script_dir/results
-results_path=$results_dir/filereader_1.txt
+results_path=$results_dir/parallel_filereader_1.txt
 
 if [[ ! -d $results_dir ]]; then
 	mkdir -p "$results_dir"
