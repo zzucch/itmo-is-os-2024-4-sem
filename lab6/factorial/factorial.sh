@@ -7,14 +7,14 @@ if [[ $# -lt 1 ]]; then
 	exit 1
 fi
 
-n=$1
+n=$((1000 + "$1"))
 
 factorial() {
-	local n=$1
-	local result=1
+	local _n=$1
+	local _result=1
 
-	for ((i = 1; i <= n; i++)); do
-		result=$((result * i))
+	for ((_i = 1; _i <= _n; _i++)); do
+		result=$((result * _i))
 	done
 }
 
