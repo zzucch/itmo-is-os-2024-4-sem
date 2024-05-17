@@ -10,7 +10,9 @@ if [[ ! -d $results_dir ]]; then
 fi
 
 for ((i = 1; i <= 20; i++)); do
+	echo "i = $i"
 	for ((j = 1; j <= 10; j++)); do
+	echo " j = $j"
 		/usr/bin/time -o tmp.txt -f "%e" bash "$script_path" "$i"
 		tail -n 1 tmp.txt >>"$results_path"
 	done
