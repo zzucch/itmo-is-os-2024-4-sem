@@ -17,3 +17,7 @@ for ((i = 1; i <= k; i++)); do
 
 	sleep 1
 done
+
+wait
+
+echo "done"
