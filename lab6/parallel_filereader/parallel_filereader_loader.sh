@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 script_dir=$(dirname "$0")
-script_path=$script_dir/filereader.sh
+script_path=$script_dir/parallel_filereader.sh
 results_dir=$script_dir/results
 results_path=$results_dir/parallel_filereader_1.txt
 
